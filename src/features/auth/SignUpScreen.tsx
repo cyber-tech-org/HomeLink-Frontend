@@ -27,7 +27,7 @@ export default function SignUpScreen() {
                     {/* Content Container */}
                     <View className="px-6 pt-6 pb-8 justify-between flex-1">
                         <View className="items-center">
-                            <ThemedText className="text-gray text-xs text-center uppercase tracking-widest mb-5">
+                            <ThemedText className="text-gray text-base text-center uppercase tracking-widest mb-5">
                                 Welcome to Real Scout
                             </ThemedText>
 
@@ -36,34 +36,35 @@ export default function SignUpScreen() {
                                 <Text className="text-primary"> Your Ideal Home</Text>
                             </ThemedText>
 
-                            <ThemedText className="text-gray text-center text-base">
+                            <ThemedText className="text-gray text-center text-base font-semibold mb-8">
                                 Login to Real Scout with Google
                             </ThemedText>
-                        </View>
 
-                        <TouchableOpacity
-                            className="w-full bg-white border border-gray/20 rounded-full py-4 flex-row justify-center items-center shadow-sm relative"
-                            activeOpacity={0.8}
-                            style={{
-                                shadowColor: "#000",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 2,
-                                },
-                                shadowOpacity: 0.1,
-                                shadowRadius: 3.84,
-                                elevation: 5,
-                            }}
-                        >
-                            <Image
-                                source={require('../../../assets/GoogleIcon.png')}
-                                className="w-6 h-6 mr-3"
-                                resizeMode="contain"
-                            />
-                            <ThemedText className="text-black font-rubik-medium text-lg">
-                                Sign Up with Google
-                            </ThemedText>
-                        </TouchableOpacity>
+
+                            <TouchableOpacity
+                                className="w-full bg-white border border-gray/20 rounded-full py-4 flex-row justify-center items-center shadow-sm relative"
+                                activeOpacity={0.8}
+                                style={{
+                                    shadowColor: "#000",
+                                    shadowOffset: {
+                                        width: 0,
+                                        height: 2,
+                                    },
+                                    shadowOpacity: 0.1,
+                                    shadowRadius: 3.84,
+                                    elevation: 5,
+                                }}
+                            >
+                                <Image
+                                    source={require('../../../assets/GoogleIcon.png')}
+                                    className="w-6 h-6 mr-3"
+                                    resizeMode="contain"
+                                />
+                                <ThemedText className="text-black font-rubik-medium text-lg">
+                                    Sign Up with Google
+                                </ThemedText>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
