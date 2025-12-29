@@ -1,10 +1,36 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { ThemedText } from '../../components/ThemedText';
+import * as AppleAuthentication from 'expo-apple-authentication';
+
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function SignUpScreen() {
+    // We want the button on all devices, so we don't strictly hide it based on availability 
+    // (though on recent Expo versions, signInAsync works on Android too via web).
+
+    const handleAppleSignIn = async () => {
+        try {
+            const credential = await AppleAuthentication.signInAsync({
+                requestedScopes: [
+                    AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                    AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                ],
+            });
+            // Handle successful login
+            console.log(credential);
+        } catch (e: any) {
+            if (e.code === 'ERR_REQUEST_CANCELED') {
+                // handle that the user canceled the sign-in flow
+            } else {
+                // handle other errors
+                console.error(e);
+            }
+        }
+    };
+
     return (
         <SafeAreaView className="flex-1 bg-white">
             <StatusBar style="dark" />
@@ -36,9 +62,9 @@ export default function SignUpScreen() {
                                 <Text className="text-primary"> Your Ideal Home</Text>
                             </ThemedText>
 
-                            <ThemedText className="text-gray text-center text-base font-semibold mb-8">
-                                Login to Real Scout with Google
-                            </ThemedText>
+                            {/* <ThemedText className="text-gray text-center text-base font-semibold mb-8">
+                                Sign Up to Real Scout with Google
+                            </ThemedText> */}
 
 
                             <TouchableOpacity
@@ -64,6 +90,29 @@ export default function SignUpScreen() {
                                     Sign Up with Google
                                 </ThemedText>
                             </TouchableOpacity>
+
+                            <View className="w-full mt-4 h-16">
+                                {Platform.OS === 'ios' ? (
+                                    <AppleAuthentication.AppleAuthenticationButton
+                                        buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+                                        buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+                                        cornerRadius={50}
+                                        style={{ width: '100%', height: '100%' }}
+                                        onPress={handleAppleSignIn}
+                                    />
+                                ) : (
+                                    <TouchableOpacity
+                                        className="w-full bg-black rounded-full py-4 flex-row justify-center items-center shadow-sm relative h-full"
+                                        activeOpacity={0.8}
+                                        onPress={handleAppleSignIn}
+                                    >
+                                        <FontAwesome name="apple" size={24} color="white" style={{ marginRight: 12 }} />
+                                        <Text className="text-white font-medium text-lg" style={{ fontFamily: 'Rubik_500Medium' }}>
+                                            Sign Up with Apple
+                                        </Text>
+                                    </TouchableOpacity>
+                                )}
+                            </View>
                         </View>
                     </View>
                 </View>

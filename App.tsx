@@ -17,7 +17,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 
 import SignUpScreen from './src/features/auth/SignUpScreen';
-import HomeSplashScreen from './src/features/home/SplashScreen';
+import HomeSplashScreen from './src/features/splash/SplashScreen';
 
 SplashScreen.preventAutoHideAsync();
 
