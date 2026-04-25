@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Welcome to Homelink Backend!"', () => {
-      expect(appController.getHello()).toBe('Welcome to Homelink Backend!');
+      expect(appController.getGreetings()).toEqual({ message: 'Welcome to Homelink Backend!' } as { message: string });
     });
   });
 });
